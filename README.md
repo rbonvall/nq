@@ -19,7 +19,7 @@ Find all images that have `cat` or `dog` somewhere in their names:
 
 More features to come.
 
-All searchs start from the current directory
+All searches start from the current directory
 and are case insensitive.
 
 Author
