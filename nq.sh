@@ -26,18 +26,18 @@ done
 
 if [ ${#extensions[*]} -gt 0 ] && [ ${#patterns[*]} -gt 0 ]
 then
-    echo find "$PWD" "(" ${extensions[*]} ")" -and "(" ${patterns[*]} ")"
+    #echo find "$PWD" "(" ${extensions[*]} ")" -and "(" ${patterns[*]} ")"
     find "$PWD" "(" ${extensions[*]} ")" -and "(" ${patterns[*]} ")"
 elif [ ${#extensions[*]} -gt 0 ]
 then
-    echo find "$PWD" ${extensions[*]}
+    #echo find "$PWD" ${extensions[*]}
     find "$PWD" ${extensions[*]}
 elif [ ${#patterns[*]} -gt 0 ]
 then
-    echo find "$PWD" ${patterns[*]}
+    #echo find "$PWD" ${patterns[*]}
     find "$PWD" ${patterns[*]}
 else
-    echo find "$PWD"
+    #echo find "$PWD"
     find "$PWD"
 fi
 
