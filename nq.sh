@@ -5,21 +5,22 @@ declare -a patterns
 
 for arg
 do
+    if [ "$arg" = "${arg,,}" ] # $arg is lower case
+    then
+        pattern_test=-iname
+    else
+        pattern_test=-name
+    fi
+
     first_char="${arg:0:1}"
     if [ "$first_char" = . ]
     then
         ext="${arg#.}"
-        if [ ${#extensions[*]} -gt 0 ]
-        then
-            extensions+=(-or)
-        fi
-        extensions+=(-iname "*.$ext")
+        [ ${#extensions[*]} -gt 0 ] && extensions+=(-or)
+        extensions+=($pattern_test "*.$ext")
     else
-        if [ ${#patterns[*]} -gt 0 ]
-        then
-            patterns+=(-or)
-        fi
-        patterns+=(-iname "*$arg*")
+        [ ${#patterns[*]} -gt 0 ] && patterns+=(-or)
+        patterns+=($pattern_test "*$arg*")
     fi
 done
 
