@@ -22,6 +22,11 @@ More features to come.
 All searches start from the current directory
 and are case insensitive.
 
+Installation
+------------
+    cd ~/bin
+    ln -s /path/to/nq.sh nq
+
 Author
 ------
 Roberto Bonvallet <rbonvall@gmail.com>
