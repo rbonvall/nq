@@ -9,6 +9,14 @@ Find all files with extension `.py`:
 
     nq .py
 
+Find all images:
+
+    nq .png .jpg .gif
+
+Find all images that have `cat` or `dog` somewhere in their names:
+
+    nq cat dog .png .jpg .gif
+
 More features to come.
 
 All searchs start from the current directory
