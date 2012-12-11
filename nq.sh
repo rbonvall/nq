@@ -6,6 +6,12 @@ declare -a command_line
 
 for arg
 do
+    if [ "$arg" = -s ]
+    then
+        show_command_line=yes
+        continue
+    fi
+
     if [ "$arg" = "${arg,,}" ] # $arg is lower case
     then
         pattern_test=-iname
@@ -37,4 +43,11 @@ elif [ ${#patterns[*]} -gt 0 ]
 then
     command_line+=(${patterns[*]})
 fi
-${command_line[*]}
+
+
+if [ "${show_command_line:-no}" = yes ]
+then
+    echo ${command_line[*]} # Buggy!
+else
+    ${command_line[*]}
+fi
