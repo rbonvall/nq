@@ -2,6 +2,7 @@
 
 declare -a extensions
 declare -a patterns
+declare -a command_line
 
 for arg
 do
@@ -24,20 +25,16 @@ do
     fi
 done
 
+command_line=(find "$PWD")
+
 if [ ${#extensions[*]} -gt 0 ] && [ ${#patterns[*]} -gt 0 ]
 then
-    #echo find "$PWD" "(" ${extensions[*]} ")" -and "(" ${patterns[*]} ")"
-    find "$PWD" "(" ${extensions[*]} ")" -and "(" ${patterns[*]} ")"
+    command_line+=("(" ${extensions[*]} ")" -and "(" ${patterns[*]} ")")
 elif [ ${#extensions[*]} -gt 0 ]
 then
-    #echo find "$PWD" ${extensions[*]}
-    find "$PWD" ${extensions[*]}
+    command_line+=(${extensions[*]})
 elif [ ${#patterns[*]} -gt 0 ]
 then
-    #echo find "$PWD" ${patterns[*]}
-    find "$PWD" ${patterns[*]}
-else
-    #echo find "$PWD"
-    find "$PWD"
+    command_line+=(${patterns[*]})
 fi
-
+${command_line[*]}
