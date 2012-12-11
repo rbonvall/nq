@@ -3,7 +3,7 @@
 declare -a extensions
 declare -a patterns
 
-for arg in $*
+for arg
 do
     first_char="${arg:0:1}"
     if [ "$first_char" = . ]
