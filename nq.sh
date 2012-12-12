@@ -12,30 +12,32 @@ starts_with() {
     [ "$1" = "${2:0:${#1}}" ]
 }
 
-for arg
+while (( "$#" ))
 do
-    if [ "$arg" = -s ]
+    if [ "$1" = -s ]
     then
         show_command_line=yes
         continue
     fi
 
-    if is_lowercase "$arg"
+    if is_lowercase "$1"
     then
         pattern_test=-iname
     else
         pattern_test=-name
     fi
 
-    if starts_with . "$arg"
+    if starts_with . "$1"
     then
-        ext="${arg#.}"
+        ext="${1#.}"
         [ ${#extensions[*]} -gt 0 ] && extensions+=(-or)
         extensions+=($pattern_test "*.$ext")
     else
         [ ${#patterns[*]} -gt 0 ] && patterns+=(-or)
-        patterns+=($pattern_test "*$arg*")
+        patterns+=($pattern_test "*$1*")
     fi
+
+    shift
 done
 
 command_line=(find "$PWD")
