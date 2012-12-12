@@ -8,6 +8,10 @@ is_lowercase() {
     [ "$1" = "${1,,}" ]
 }
 
+starts_with() {
+    [ "$1" = "${2:0:${#1}}" ]
+}
+
 for arg
 do
     if [ "$arg" = -s ]
@@ -23,8 +27,7 @@ do
         pattern_test=-name
     fi
 
-    first_char="${arg:0:1}"
-    if [ "$first_char" = . ]
+    if starts_with . "$arg"
     then
         ext="${arg#.}"
         [ ${#extensions[*]} -gt 0 ] && extensions+=(-or)
