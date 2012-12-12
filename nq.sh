@@ -12,7 +12,8 @@ do
         continue
     fi
 
-    if [ "$arg" = "${arg,,}" ] # $arg is lower case
+    lowercase_arg="${arg,,}"
+    if [ "$arg" = "$lowercase_arg" ]
     then
         pattern_test=-iname
     else
