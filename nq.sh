@@ -6,23 +6,25 @@ declare -a command_line
 
 usage() {
     name=$(basename $0)
-    echo "nq --- a simpler find"
-    echo "Usage: $name [OPTIONS] [PATTERNS] [FIND-OPTIONS]"
-    echo
-    echo "OPTIONS can be one of:"
-    echo "  -s: show find(1) command instead of executing it."
-    echo "  -h: show this message and exit."
-    echo
-    echo "A PATTERN that starts with a dot is a file extension."
-    echo "Otherwise, it is a string to be found in the file name."
-    echo "A PATTERN is case-insensitive, unless it has at least"
-    echo "one upper case letter in it."
-    echo
-    echo "FIND-OPTIONS are passed verbatim to find(1)."
-    echo "From the first option starting with a dash,"
-    echo "if not -s or -h, all options are FIND-OPTIONS."
-    echo
-    echo "Project site: <https://github.com/rbonvall/nq>"
+    cat <<-EOF
+	nq --- a simpler find
+	Usage: $name [OPTIONS] [PATTERNS] [FIND-OPTIONS]
+
+	OPTIONS can be one of:
+	  -s: show find(1) command instead of executing it.
+	  -h: show this message and exit.
+
+	A PATTERN that starts with a dot is a file extension.
+	Otherwise, it is a string to be found in the file name.
+	A PATTERN is case-insensitive, unless it has at least
+	one upper case letter in it.
+
+	FIND-OPTIONS are passed verbatim to find(1).
+	From the first option starting with a dash,
+	if not -s or -h, all options are FIND-OPTIONS.
+
+	Project site: <https://github.com/rbonvall/nq>
+	EOF
 }
 
 is_lowercase() {
