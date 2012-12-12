@@ -4,6 +4,10 @@ declare -a extensions
 declare -a patterns
 declare -a command_line
 
+is_lowercase() {
+    [ "$1" = "${1,,}" ]
+}
+
 for arg
 do
     if [ "$arg" = -s ]
@@ -12,8 +16,7 @@ do
         continue
     fi
 
-    lowercase_arg="${arg,,}"
-    if [ "$arg" = "$lowercase_arg" ]
+    if is_lowercase "$arg"
     then
         pattern_test=-iname
     else
