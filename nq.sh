@@ -28,10 +28,20 @@ usage() {
 }
 
 is_lowercase() {
+    # $ is_lowercase foo && echo yes || echo no
+    # yes
+    # $ is_lowercase Foo && echo yes || echo no
+    # no
+
     [ "$1" = "${1,,}" ]
 }
 
 starts_with() {
+    # $ starts_with let letter && echo yes || echo no
+    # yes
+    # $ starts_with get setter && echo yes || echo no
+    # no
+
     [ "$1" = "${2:0:${#1}}" ]
 }
 
