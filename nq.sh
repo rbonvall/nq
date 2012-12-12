@@ -17,6 +17,7 @@ do
     if [ "$1" = -s ]
     then
         show_command_line=yes
+        shift
         continue
     fi
 
