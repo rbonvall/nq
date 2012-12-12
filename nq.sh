@@ -19,6 +19,9 @@ do
         show_command_line=yes
         shift
         continue
+    elif starts_with - "$1"
+    then
+        break
     fi
 
     if is_lowercase "$1"
@@ -54,6 +57,7 @@ then
     command_line+=(${patterns[*]})
 fi
 
+command_line+=("$@")
 
 if [ "${show_command_line:-no}" = yes ]
 then
