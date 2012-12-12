@@ -34,10 +34,10 @@ do
     if starts_with . "$1"
     then
         ext="${1#.}"
-        [ ${#extensions[*]} -gt 0 ] && extensions+=(-or)
+        [ ${#extensions[@]} -gt 0 ] && extensions+=(-or)
         extensions+=($pattern_test "*.$ext")
     else
-        [ ${#patterns[*]} -gt 0 ] && patterns+=(-or)
+        [ ${#patterns[@]} -gt 0 ] && patterns+=(-or)
         patterns+=($pattern_test "*$1*")
     fi
 
@@ -46,22 +46,22 @@ done
 
 command_line=(find "$PWD")
 
-if [ ${#extensions[*]} -gt 0 ] && [ ${#patterns[*]} -gt 0 ]
+if [ ${#extensions[@]} -gt 0 ] && [ ${#patterns[@]} -gt 0 ]
 then
-    command_line+=("(" ${extensions[*]} ")" -and "(" ${patterns[*]} ")")
-elif [ ${#extensions[*]} -gt 0 ]
+    command_line+=("(" "${extensions[@]}" ")" -and "(" "${patterns[@]}" ")")
+elif [ ${#extensions[@]} -gt 0 ]
 then
-    command_line+=(${extensions[*]})
-elif [ ${#patterns[*]} -gt 0 ]
+    command_line+=("${extensions[@]}")
+elif [ ${#patterns[@]} -gt 0 ]
 then
-    command_line+=(${patterns[*]})
+    command_line+=("${patterns[@]}")
 fi
 
 command_line+=("$@")
 
 if [ "${show_command_line:-no}" = yes ]
 then
-    echo ${command_line[*]} # Buggy!
+    echo "${command_line[@]}" # Buggy!
 else
-    ${command_line[*]}
+    "${command_line[@]}"
 fi
