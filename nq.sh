@@ -4,6 +4,27 @@ declare -a extensions
 declare -a patterns
 declare -a command_line
 
+usage() {
+    name=$(basename $0)
+    echo "nq --- a simpler find"
+    echo "Usage: $name [OPTIONS] [PATTERNS] [FIND-OPTIONS]"
+    echo
+    echo "OPTIONS can be one of:"
+    echo "  -s: show find(1) command instead of executing it."
+    echo "  -h: show this message and exit."
+    echo
+    echo "A PATTERN that starts with a dot is a file extension."
+    echo "Otherwise, it is a string to be found in the file name."
+    echo "A PATTERN is case-insensitive, unless it has at least"
+    echo "one upper case letter in it."
+    echo
+    echo "FIND-OPTIONS are passed verbatim to find(1)."
+    echo "From the first option starting with a dash,"
+    echo "if not -s or -h, all options are FIND-OPTIONS."
+    echo
+    echo "Project site: <https://github.com/rbonvall/nq>"
+}
+
 is_lowercase() {
     [ "$1" = "${1,,}" ]
 }
@@ -19,6 +40,10 @@ do
         show_command_line=yes
         shift
         continue
+    elif [ "$1" = -h ]
+    then
+        usage
+        exit
     elif starts_with - "$1"
     then
         break
