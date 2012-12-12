@@ -84,7 +84,12 @@ do
         extensions+=($pattern_test "*.$ext")
     else
         [ ${#patterns[@]} -gt 0 ] && patterns+=(-or)
-        patterns+=($pattern_test "*$1*")
+        if ends_with / "$1"
+        then
+            patterns+=($pattern_test "*${1%/}*" -type d)
+        else
+            patterns+=($pattern_test "*$1*")
+        fi
     fi
 
     shift
