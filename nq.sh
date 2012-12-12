@@ -45,6 +45,15 @@ starts_with() {
     [ "$1" = "${2:0:${#1}}" ]
 }
 
+ends_with() {
+    # $ ends_with use house && echo yes || echo no
+    # yes
+    # $ ends_with use home && echo yes || echo no
+    # no
+
+    [ "$1" = "${2: -${#1}}" ]
+}
+
 while (( "$#" ))
 do
     if [ "$1" = -s ]
