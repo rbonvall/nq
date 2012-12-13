@@ -62,7 +62,7 @@ do
         show_command_line=yes
         shift
         continue
-    elif [ "$1" = -h ]
+    elif [ "$1" = -h ] || [ "$1" = --help ]
     then
         usage
         exit
