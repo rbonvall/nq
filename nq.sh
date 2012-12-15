@@ -115,7 +115,7 @@ command_line+=("$@")
 
 if (( $show_command_line ))
 then
-    echo "${command_line[@]}" # Buggy!
+    echo "${command_line[@]}" # Shown unescaped!
 else
     "${command_line[@]}"
 fi
