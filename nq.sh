@@ -59,7 +59,7 @@ while (( "$#" ))
 do
     if [ "$1" = -s ]
     then
-        show_command_line=yes
+        show_command_line=1
         shift
         continue
     elif [ "$1" = -h ] || [ "$1" = --help ]
@@ -111,7 +111,7 @@ fi
 
 command_line+=("$@")
 
-if [ "${show_command_line:-no}" = yes ]
+if (( $show_command_line ))
 then
     echo "${command_line[@]}" # Buggy!
 else
