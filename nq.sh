@@ -98,10 +98,12 @@ done
 
 command_line=(find "$PWD")
 
-if [ ${#extensions[@]} -gt 0 ] && [ ${#patterns[@]} -gt 0 ]
+nr_extensions=${#extensions[@]}
+nr_patterns=${#patterns[@]}
+if (( $nr_extensions )) && (( $nr_patterns ))
 then
     command_line+=("(" "${extensions[@]}" ")" -and "(" "${patterns[@]}" ")")
-elif [ ${#extensions[@]} -gt 0 ]
+elif (( $nr_extensions ))
 then
     command_line+=("${extensions[@]}")
 elif [ ${#patterns[@]} -gt 0 ]
