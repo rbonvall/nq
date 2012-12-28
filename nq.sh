@@ -102,7 +102,8 @@ done
 
 command_line=(find "$PWD"
     "(" "${extensions[@]}"  ")" -and
-    "(" "${patterns[@]}"    ")"
+    "(" "${patterns[@]}"    ")" -and
+    "(" "${directories[@]}" ")"
     "$@"
 )
 
