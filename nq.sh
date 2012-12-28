@@ -96,22 +96,15 @@ do
     shift
 done
 
-command_line=(find "$PWD")
+[ ${#directories[@]} -eq 0 ] && directories=(-true)
+[ ${#extensions[@]} -eq 0 ] && extensions=(-true)
+[ ${#patterns[@]} -eq 0 ] && patterns=(-true)
 
-nr_extensions=${#extensions[@]}
-nr_patterns=${#patterns[@]}
-if (( $nr_extensions )) && (( $nr_patterns ))
-then
-    command_line+=("(" "${extensions[@]}" ")" -and "(" "${patterns[@]}" ")")
-elif (( $nr_extensions ))
-then
-    command_line+=("${extensions[@]}")
-elif [ ${#patterns[@]} -gt 0 ]
-then
-    command_line+=("${patterns[@]}")
-fi
-
-command_line+=("$@")
+command_line=(find "$PWD"
+    "(" "${extensions[@]}"  ")" -and
+    "(" "${patterns[@]}"    ")"
+    "$@"
+)
 
 if (( $show_command_line ))
 then
