@@ -2,6 +2,7 @@
 
 declare -a extensions
 declare -a patterns
+declare -a directories
 declare -a command_line
 
 usage() {
@@ -83,14 +84,13 @@ do
         ext="${1#.}"
         [ ${#extensions[@]} -gt 0 ] && extensions+=(-or)
         extensions+=($pattern_test "*.$ext")
+    elif ends_with / "$1"
+    then
+        [ ${#directories[@]} -gt 0 ] && extensions+=(-or)
+        directories+=(-path "*${1%/}*/*")
     else
         [ ${#patterns[@]} -gt 0 ] && patterns+=(-or)
-        if ends_with / "$1"
-        then
-            patterns+=($pattern_test "*${1%/}*" -type d)
-        else
-            patterns+=($pattern_test "*$1*")
-        fi
+        patterns+=($pattern_test "*$1*")
     fi
 
     shift
