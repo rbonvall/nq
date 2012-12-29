@@ -56,6 +56,27 @@ ends_with() {
     [ "$1" = "${2: -${#1}}" ]
 }
 
+escape() {
+    # $ escape icecream
+    # icecream
+    # $ escape ice*cream
+    # "ice*cream"
+    # $ escape "(icecream)"
+    # "(icecream)"
+    # $ escape "("
+    # \(
+
+    i="$1"
+    if [[ "$i" =~ ^[()]$ ]]
+    then
+        i=\\"$1"
+    elif [[ "$i" =~ [*?()] ]]
+    then
+        i='"'"$i"'"'
+    fi
+    echo "$i"
+}
+
 while (( "$#" ))
 do
     if [ "$1" = -s ]
@@ -109,7 +130,11 @@ command_line=(find "$PWD"
 
 if (( $show_command_line ))
 then
-    echo "${command_line[@]}" # Shown unescaped!
+    for i in "${command_line[@]}"
+    do
+        echo -n "$(escape "$i") "
+    done
+    echo
 else
     "${command_line[@]}"
 fi
