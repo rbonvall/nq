@@ -19,7 +19,8 @@ usage() {
 	Otherwise, it is a string to be found in the file name.
 	A PATTERN is case-insensitive, unless it has at least
 	one upper case letter in it.
-	If a PATTERN ends with a slash, only directories are shown.
+	If a PATTERN ends with a slash, it refers to a directory
+	in which the file has to be.
 
 	FIND-OPTIONS are passed verbatim to find(1).
 	From the first option starting with a dash,
