@@ -36,7 +36,7 @@ is_lowercase() {
     # $ is_lowercase Foo && echo yes || echo no
     # no
 
-    [ "$1" = "${1,,}" ]
+    [ "$1" = $(tr '[A-Z]' '[a-z]' <<< $1) ]
 }
 
 starts_with() {
